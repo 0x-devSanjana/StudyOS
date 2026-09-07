@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card"><h2>New Note</h2>
+<form method="post"><div class="form-grid">
+<label>Title<input name="title" placeholder="Formula / revision / journal..." required></label>
+<label>Type<select name="note_type"><option>General</option><option>Formula</option><option>Revision</option><option>Journal</option><option>PYQ</option></select></label>
+</div><label>Note<textarea name="body" rows="7" required></textarea></label><button class="btn">SAVE NOTE</button></form></section>
+<section class="card"><h2>Saved Notes</h2>
+{% for n in notes %}<article class="note"><div><b>{{ n.title }}</b><span>{{ n.note_type }} • {{ n.updated }}</span></div><p>{{ n.body }}</p></article>{% else %}<p class="muted">No notes yet.</p>{% endfor %}
+</section>
+{% endblock %}

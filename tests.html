@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+<h2>Enter Test Result</h2>
+<form method="post" class="form-grid">
+  <label>Test name<input name="name" value="Mock Test" required></label>
+  <label>Physics<input name="physics" type="number" step="0.1" min="0" required></label>
+  <label>Chemistry<input name="chemistry" type="number" step="0.1" min="0" required></label>
+  <label>Mathematics<input name="mathematics" type="number" step="0.1" min="0" required></label>
+  <label>Maximum marks<input name="maximum" type="number" step="0.1" min="1" value="300" required></label>
+  <button class="btn" type="submit">ANALYZE & SAVE TEST</button>
+</form>
+</section>
+
+<section class="card">
+<h2>Mock Test History</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Date</th><th>Test</th><th>Physics</th><th>Chemistry</th><th>Maths</th><th>Total</th><th>%</th></tr></thead>
+<tbody>
+{% for t in tests %}
+<tr><td>{{ t.test_date }}</td><td><b>{{ t.name }}</b></td><td>{{ "%.1f"|format(t.physics) }}</td><td>{{ "%.1f"|format(t.chemistry) }}</td><td>{{ "%.1f"|format(t.mathematics) }}</td><td>{{ "%.0f"|format(t.physics+t.chemistry+t.mathematics) }}/{{ "%.0f"|format(t.maximum) }}</td><td>{{ "%.1f"|format((t.physics+t.chemistry+t.mathematics)/t.maximum*100) }}%</td></tr>
+{% else %}<tr><td colspan="7" class="muted">No saved tests yet.</td></tr>{% endfor %}
+</tbody></table></div>
+</section>
+{% endblock %}

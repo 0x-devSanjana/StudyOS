@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="stats">
+{% for s,v in subject_values.items() %}<div class="stat card"><span>{{ s }}</span><strong>{{ "%.1f"|format(v) }}%</strong><small>normalized average</small></div>{% endfor %}
+<div class="stat card"><span>Tests</span><strong>{{ tests|length }}</strong><small>saved mock tests</small></div>
+</div>
+<section class="card"><h2>Mock Test Percentage Trend</h2>
+<div class="chart"><div class="chart-y"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+<div class="bars">{% for v in values %}<div class="bar-wrap"><div class="bar" style="height:{{ [v,100]|min }}%"></div><small>{{ "%.0f"|format(v) }}%</small></div>{% endfor %}</div></div>
+</section>
+{% endblock %}

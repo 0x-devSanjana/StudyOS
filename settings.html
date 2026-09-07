@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+<h2>Personalize StudyOS</h2>
+<form method="post" class="settings-form">
+<label>Your Name<input name="name" value="{{ username }}" required></label>
+<label>Exam Name<input name="exam_name" value="{{ exam_name }}" required></label>
+<label>Exam Date<input name="exam_date" type="date" value="{{ exam_date }}" required></label>
+<button class="btn">SAVE SETTINGS</button>
+</form>
+<p class="muted">All scores, chapters, tasks, notes, mistakes and study sessions are stored locally in <b>studyos.db</b>.</p>
+</section>
+<section class="card"><h2>StudyOS Intelligence</h2><p class="muted">The current version uses local performance rules and your saved data for smart recommendations, so it works without an API key or internet connection.</p></section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero card">
+  <div>
+    <div class="quote">“{{ quote }}”</div>
+    <p class="muted">Welcome back, {{ username }}. Keep the system running — one focused session at a time.</p>
+    <a class="btn" href="{{ url_for('timer') }}">Start Focus Session</a>
+  </div>
+  <div class="hero-count">
+    <span>EXAM COUNTDOWN</span><strong>{{ days_left }}</strong><small>DAYS LEFT</small>
+    <em>{{ exam_date }}</em>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat card"><span>Test Average</span><strong>{{ "%.1f"|format(test_average) }}%</strong><small>{{ tests|length }} recent tests shown</small></div>
+  <div class="stat card"><span>Syllabus</span><strong>{{ "%.0f"|format(syllabus) }}%</strong><small>chapter completion</small></div>
+  <div class="stat card"><span>Study Today</span><strong>{{ today_minutes }}m</strong><small>focus time</small></div>
+  <div class="stat card"><span>Tasks Today</span><strong>{{ completed_tasks }}</strong><small>/ {{ tasks|length }} completed</small></div>
+</div>
+
+<div class="two-col">
+  <section class="card">
+    <div class="section-head"><h2>Recent Tests</h2><a href="{{ url_for('tests') }}">View all →</a></div>
+    {% if tests %}
+      {% for t in tests %}
+      <div class="list-row"><b>{{ t.name }}</b><span>{{ "%.0f"|format(t.physics+t.chemistry+t.mathematics) }}/{{ "%.0f"|format(t.maximum) }} • {{ "%.1f"|format((t.physics+t.chemistry+t.mathematics)/t.maximum*100) }}%</span></div>
+      {% endfor %}
+    {% else %}<p class="muted">No tests yet. Add your first mock test.</p>{% endif %}
+  </section>
+  <section class="card">
+    <div class="section-head"><h2>StudyOS Smart Advice</h2></div>
+    {% for item in advice %}<p class="advice">→ {{ item }}</p>{% endfor %}
+  </section>
+</div>
+
+<div class="card">
+  <div class="section-head"><h2>Quick Actions</h2></div>
+  <div class="quick-grid">
+    <a href="{{ url_for('tests') }}">📝 Analyze a mock test</a>
+    <a href="{{ url_for('chapters') }}">📚 Update chapters</a>
+    <a href="{{ url_for('tasks') }}">✅ Add today's goal</a>
+    <a href="{{ url_for('notes') }}">📓 Write a note</a>
+  </div>
+</div>
+{% endblock %}

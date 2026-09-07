@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="tabs">{% for s in subjects %}<a class="{% if s==subject %}selected{% endif %}" href="{{ url_for('chapters',subject=s) }}">{{ s }}</a>{% endfor %}</div>
+<section class="card">
+<h2>{{ subject }} Chapter Tracker</h2>
+<div class="chapter-head"><span>Chapter</span><span>Complete</span><span>Revised</span><span>PYQs</span></div>
+{% for r in rows %}
+<div class="chapter-row">
+  <b>{{ r.chapter }}</b>
+  {% for field,label in [('completed','Done'),('revised','Revised'),('pyq_completed','PYQs')] %}
+  <form method="post" action="{{ url_for('update_chapter',chapter_id=r.id) }}">
+    <input type="hidden" name="field" value="{{ field }}"><input type="hidden" name="subject" value="{{ subject }}">
+    <input type="hidden" name="value" value="{{ 0 if r[field] else 1 }}">
+    <button class="check {% if r[field] %}checked{% endif %}" title="Toggle {{ label }}">{{ '✓' if r[field] else '○' }}</button>
+  </form>
+  {% endfor %}
+</div>
+{% endfor %}
+</section>
+{% endblock %}

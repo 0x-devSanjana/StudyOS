@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="two-col">
+{% for subject,rows in by.items() %}
+<section class="card">
+<h2>{{ subject }}</h2>
+{% set due = rows|selectattr('completed','equalto',1)|selectattr('revised','equalto',0)|list %}
+{% set incomplete = rows|selectattr('completed','equalto',0)|list %}
+{% if due %}
+<p class="priority">↻ Revision priority</p>
+{% for r in due[:8] %}<div class="list-row"><b>{{ r.chapter }}</b><span>completed, not revised</span></div>{% endfor %}
+{% elif incomplete %}
+<p class="priority">→ Finish next</p>
+{% for r in incomplete[:8] %}<div class="list-row"><b>{{ r.chapter }}</b><span>not completed</span></div>{% endfor %}
+{% else %}<p class="muted">Everything is completed and revised.</p>{% endif %}
+</section>
+{% endfor %}
+</div>
+{% endblock %}

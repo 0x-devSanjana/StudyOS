@@ -1,0 +1,14 @@
+STUDYOS — SAFE PACKAGE
+
+This package contains the StudyOS web app and does NOT contain a Windows .exe,
+.bat, or .cmd file.
+
+To start it:
+1. Make sure Python is installed.
+2. Open a terminal in this folder.
+3. Run:
+   python start_studyos.py
+
+Your browser should open StudyOS automatically.
+
+For the public website, this same project is already prepared for a web host.
