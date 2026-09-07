@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card"><h2>Log a Mistake</h2>
+<form method="post">
+<div class="form-grid"><label>Subject<select name="subject">{% for s in ['Physics','Chemistry','Mathematics'] %}<option>{{ s }}</option>{% endfor %}</select></label><label>Topic<input name="topic" required></label></div>
+<label>What went wrong?<textarea name="mistake" rows="4" required></textarea></label>
+<label>Correct approach / lesson<textarea name="solution" rows="4"></textarea></label>
+<button class="btn">SAVE MISTAKE</button>
+</form></section>
+<section class="card"><h2>Recent Mistakes</h2>
+{% for m in mistakes %}<article class="mistake"><b>{{ m.subject }} • {{ m.topic }}</b><p><strong>Mistake:</strong> {{ m.mistake }}</p>{% if m.solution %}<p><strong>Lesson:</strong> {{ m.solution }}</p>{% endif %}</article>{% else %}<p class="muted">No mistakes logged yet.</p>{% endfor %}
+</section>
+{% endblock %}

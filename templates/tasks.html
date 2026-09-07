@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+<h2>Today's Goals</h2>
+<form method="post" class="inline-form"><input name="task" placeholder="e.g. Finish 30 Electrostatics PYQs" required><button class="btn">+ ADD TASK</button></form>
+<div class="task-list">
+{% for t in tasks %}
+<form method="post" action="{{ url_for('update_task',task_id=t.id) }}" class="task">
+<input type="hidden" name="completed" value="{{ 0 if t.completed else 1 }}">
+<button class="check {% if t.completed %}checked{% endif %}">{{ '✓' if t.completed else '○' }}</button>
+<span class="{% if t.completed %}done{% endif %}">{{ t.task }}</span>
+</form>
+{% else %}<p class="muted">No tasks yet. Add your first goal above.</p>{% endfor %}
+</div>
+</section>
+{% endblock %}

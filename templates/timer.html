@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card timer-card">
+<div class="timer-mode" id="timerMode">FOCUS</div>
+<div class="timer-display" id="timerDisplay">25:00</div>
+<div class="timer-buttons">
+<button class="btn" onclick="startTimer()">START</button><button class="btn secondary" onclick="pauseTimer()">PAUSE</button><button class="btn secondary" onclick="resetTimer()">RESET</button>
+</div>
+<div class="preset-buttons"><button onclick="setTimer(25)">25 MIN</button><button onclick="setTimer(50)">50 MIN</button><button onclick="setTimer(5)">5 MIN BREAK</button></div>
+<p id="sessionStatus" class="muted">Complete a focus session and StudyOS will record it permanently.</p>
+</section>
+{% endblock %}
